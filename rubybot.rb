@@ -5,6 +5,7 @@ require 'geocoder'
 require 'json'
 require 'httparty'
 token = '1109360723:AAHam4xsAf-7wgF8Hjt6ACbxxOH66cimbaM'
+no_more=false
 
 Openweather2.configure do |config|
   config.endpoint = 'http://api.openweathermap.org/data/2.5/weather'
@@ -19,11 +20,15 @@ Telegram::Bot::Client.run(token) do |bot|
       elsif message.text!="/no_more"
         weather = Openweather2.get_weather(city: message.text)
         bot.api.send_message(chat_id: message.chat.id, text: "temperature in #{message.text} is: #{weather.temperature-275.15}°C")
+      else
+        no_more=true;
       end
     end
     if message.location != nil
       Thread.new { 
         loop do
+          break if no_more
+          
           lon = message.location.longitude
           lat = message.location.latitude
           chat_id = message.chat.id
@@ -31,7 +36,6 @@ Telegram::Bot::Client.run(token) do |bot|
           geo = Geocoder.search([lat.to_s, lon.to_s])
           bot.api.send_message(chat_id: chat_id, text: "current weather in #{geo.first.city} is: #{weather.temperature-275.15}°C")
           sleep(60)
-          break if message.text=="/no_more"
         end
       }
     end
