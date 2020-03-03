@@ -1,16 +1,27 @@
 require 'telegram/bot'
 require "openweather2"
 require 'geocoder'
+require_relative 'option'
 # require 'whenever'
 require 'json'
 require 'httparty'
 token = '1109360723:AAHam4xsAf-7wgF8Hjt6ACbxxOH66cimbaM'
-no_more=false
+$no_more=false
+$chosen_format='C'
+$interval=60
+$options = [Option.new("d",86400),Option.new("h",3600),Option.new("m",60),Option.new("s",1)]
 
 def celsius_weather(weather)
   return nil if weather==nil
-  
-  return (weather.temperature-275.15).round(2)
+
+  if $chosen_format=='C'
+    celsius= (weather.temperature-273.15).round(2)
+    return "#{celsius}°C"
+  elsif $chosen_format=='F'
+    farenheit= (((weather.temperature-273.15)*1.8)+32).round(2)
+    return "#{farenheit}°F"
+  end
+  return "#{weather.temperature}°K"
 end
 
 Openweather2.configure do |config|
@@ -25,6 +36,22 @@ Telegram::Bot::Client.run(token) do |bot|
         bot.api.send_message(chat_id: message.chat.id, text: "Welcome human, please share location for automatic updates of the weather every hour. For more options please type /tutorial")
       elsif message.text!="/no_more"
         case message.text.downcase
+        when /\/format/
+          temp_format = message.text.downcase.gsub('/format', '').gsub(/\s+/m, '')
+          if temp_format=~/\A[kfc]{1}\Z/ 
+            $chosen_format = temp_format.upcase
+            bot.api.send_message(chat_id: message.chat.id, text: "new format is °#{$chosen_format}")
+          else
+            bot.api.send_message(chat_id: message.chat.id, text: "invalid format")
+          end
+        when /\/interval/
+          temp_interval = message.text.downcase.gsub('/interval', '').gsub(/\s+/m, '')
+          if temp_interval =~ /\A[1-9]+[0-9]*[smhd]{1}\Z/
+            $interval= temp_interval[0..(temp_interval.length-2)]*$options.find{|opt| opt.time==temp_interval[temp_interval.length-1]}.number
+            bot.api.send_message(chat_id: message.chat.id, text: "new interval in #{$interval} seconds")
+          else
+            bot.api.send_message(chat_id: message.chat.id, text: "invalid interval")
+          end
         when /zip:/
           zipcode = message.text.downcase.gsub('zip:', '').gsub(/\s+/m, '')
           begin
@@ -33,18 +60,18 @@ Telegram::Bot::Client.run(token) do |bot|
             puts("invalid data by error: #{exception}")
           end
           temperature = celsius_weather(weather)
-          bot_message = temperature.nil? ? "invalid data" : "temperature in zip:#{zipcode} is: #{temperature}°C"
+          bot_message = temperature.nil? ? "invalid data" : "temperature in zip:#{zipcode} is: #{temperature}"
           bot.api.send_message(chat_id: message.chat.id, text: bot_message)
         when /coord:/
           coords = message.text.downcase.gsub('coord:', '').gsub(/\s+/m, ' ').strip.split(" ")
           weather=nil
           begin
-            weather = Openweather2.get_weather(lat: coords[0].to_f, lon:coords[1].to_f) if coords[0]=~ /\A\d+\.?\d*\Z/ && coords[1]=~ /\A\d+\.?\d*\Z/
+            weather = Openweather2.get_weather(lat: coords[0].to_f, lon:coords[1].to_f) if coords.all?(/\A\d+\.?\d*\Z/)
           rescue => exception
             puts("invalid data by error: #{exception}")
           end
           temperature = celsius_weather(weather)
-          bot_message = temperature.nil? ? "invalid data" : "temperature in coord:#{coords[0].to_f} #{coords[1].to_f} is: #{temperature}°C"
+          bot_message = temperature.nil? ? "invalid data" : "temperature in coord:#{coords[0].to_f} #{coords[1].to_f} is: #{temperature}"
           bot.api.send_message(chat_id: message.chat.id, text: bot_message)
         else
           city = message.text.downcase.gsub(/\s+/m, '')
@@ -54,27 +81,41 @@ Telegram::Bot::Client.run(token) do |bot|
             puts("invalid data by error: #{exception}")
           end
           temperature = celsius_weather(weather)
-          bot_message = temperature.nil? ? "invalid data" : "temperature in #{city} is: #{temperature}°C"
+          bot_message = temperature.nil? ? "invalid data" : "temperature in #{city} is: #{temperature}"
           bot.api.send_message(chat_id: message.chat.id, text: bot_message)
         end
       else
-        no_more=true;
+        $no_more=true;
       end
     end
     if message.location != nil
-      no_more=false;
+      $no_more=false;
+      lon = message.location.longitude
+      lat = message.location.latitude
+      chat_id = message.chat.id
+      geo=nil
+      begin
+        geo = Geocoder.search([lat.to_s, lon.to_s])
+      rescue => exception
+        puts("the next problem has occurred: #{exception}")
+      end
+      if geo==nil
+        bot.api.send_message(chat_id: chat_id, text: "a problem has accurred")
+        break
+      end
       Thread.new { 
         loop do
-          break if no_more
-
-          lon = message.location.longitude
-          lat = message.location.latitude
-          chat_id = message.chat.id
-          weather = Openweather2.get_weather(lon: lon, lat: lat)
-          temperature = (weather.temperature-275.15).round(2)
-          geo = Geocoder.search([lat.to_s, lon.to_s])
-          bot.api.send_message(chat_id: chat_id, text: "current weather in #{geo.first.city} is: #{temperature}°C")
-          sleep(60)
+          break if $no_more
+          weather=nil
+          begin
+            weather = Openweather2.get_weather(lon: lon, lat: lat)
+          rescue => exception
+            puts("the next problem has occurred: #{exception}")
+          end
+          temperature = celsius_weather(weather)
+          bot_message = temperature.nil? ? "a problem has occurred" : "temperature in #{geo.first.city} is: #{temperature}"
+          bot.api.send_message(chat_id: chat_id, text: bot_message)
+          sleep($interval)
         end
       }
     end
@@ -90,3 +131,5 @@ end
 #https://home.openweathermap.org/api_keys
 #https://core.telegram.org/bots/api#location
 #https://github.com/eljojo/telegram_bot/blob/master/example/bot.rb
+#https://dl.icewarp.com/online_help/203030104.htm ruby regex tutorial
+#https://www.rubyguides.com/2015/06/ruby-regex/ ruby regex tutorial
