@@ -39,17 +39,23 @@ Telegram::Bot::Client.run(token) do |bot|
           coords = message.text.downcase.gsub('coord:', '').gsub(/\s+/m, ' ').strip.split(" ")
           weather=nil
           begin
-            weather = Openweather2.get_weather(lat: coords[0].to_f, lon:coords[1].to_f)
+            weather = Openweather2.get_weather(lat: coords[0].to_f, lon:coords[1].to_f) if coords[0]=~ /\A\d+\.?\d*\Z/ && coords[1]=~ /\A\d+\.?\d*\Z/
           rescue => exception
             puts("invalid data by error: #{exception}")
           end
           temperature = celsius_weather(weather)
-          bot_message = temperature.nil? ? "invalid data" : "temperature in #{message.text} is: #{temperature}°C"
+          bot_message = temperature.nil? ? "invalid data" : "temperature in coord:#{coords[0].to_f} #{coords[1].to_f} is: #{temperature}°C"
           bot.api.send_message(chat_id: message.chat.id, text: bot_message)
         else
-          weather = Openweather2.get_weather(city: message.text)
-          temperature = (weather.temperature-275.15).round(2)
-          bot.api.send_message(chat_id: message.chat.id, text: "temperature in #{message.text} is: #{temperature}°C")
+          city = message.text.downcase.gsub(/\s+/m, '')
+          begin
+            weather = Openweather2.get_weather(city: city)
+          rescue => exception
+            puts("invalid data by error: #{exception}")
+          end
+          temperature = celsius_weather(weather)
+          bot_message = temperature.nil? ? "invalid data" : "temperature in #{city} is: #{temperature}°C"
+          bot.api.send_message(chat_id: message.chat.id, text: bot_message)
         end
       else
         no_more=true;
