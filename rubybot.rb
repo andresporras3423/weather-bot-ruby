@@ -9,7 +9,7 @@ token = '1109360723:AAHam4xsAf-7wgF8Hjt6ACbxxOH66cimbaM'
 $no_more=false
 $chosen_format='C'
 $interval=60
-$options = [Option.new("d",86400),Option.new("h",3600),Option.new("m",60),Option.new("s",1)]
+$options = [Option.new("d",86400, "days"),Option.new("h",3600, "hours"),Option.new("m",60, "minutes"),Option.new("s",1, "seconds")]
 
 def celsius_weather(weather)
   return nil if weather==nil
@@ -47,8 +47,11 @@ Telegram::Bot::Client.run(token) do |bot|
         when /\/interval/
           temp_interval = message.text.downcase.gsub('/interval', '').gsub(/\s+/m, '')
           if temp_interval =~ /\A[1-9]+[0-9]*[smhd]{1}\Z/
-            $interval= temp_interval[0..(temp_interval.length-2)]*$options.find{|opt| opt.time==temp_interval[temp_interval.length-1]}.number
-            bot.api.send_message(chat_id: message.chat.id, text: "new interval in #{$interval} seconds")
+            amount = temp_interval[0..(temp_interval.length-2)].to_i
+            chosen_option = $options.find{|opt| opt.time==temp_interval[temp_interval.length-1]}
+            chosen_format_time = amount==1 ? chosen_option.format_time[0..(chosen_option.format_time.length-2)] : chosen_option.format_time
+            $interval= amount*chosen_option.number
+            bot.api.send_message(chat_id: message.chat.id, text: "new interval in #{amount} #{chosen_format_time}")
           else
             bot.api.send_message(chat_id: message.chat.id, text: "invalid interval")
           end
