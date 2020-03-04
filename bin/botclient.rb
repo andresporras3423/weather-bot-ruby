@@ -74,7 +74,7 @@ class Botclient
     tutorial_message.push('Get temperature of miami')
     tutorial_message.push('*coord:  4.5 74.25*')
     tutorial_message.push('Get temperature of place with latitude 4.5 and longitude 74.25')
-    tutorial_message.push('*zipcode:  33101*')
+    tutorial_message.push('*zip:  33101*')
     tutorial_message.push('Get temperature of place with zip code 33101')
     tutorial_message.push('*/format c*')
     tutorial_message.push('Use celsius format, the other options are f (farenheit) and k (kelvin)')
