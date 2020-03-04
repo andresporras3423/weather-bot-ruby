@@ -2,6 +2,7 @@ require 'telegram/bot'
 require "openweather2"
 require 'geocoder'
 require_relative 'option'
+require_relative 'chatbot'
 # require 'whenever'
 require 'json'
 require 'httparty'
@@ -11,6 +12,11 @@ $chosen_format='C'
 $interval=60
 $options = [Option.new("d",86400, "days"),Option.new("h",3600, "hours"),Option.new("m",60, "minutes"),Option.new("s",1, "seconds")]
 $start ='/start'
+
+Openweather2.configure do |config|
+  config.endpoint = 'http://api.openweathermap.org/data/2.5/weather'
+  config.apikey = 'a71219e79a6b01978ac3a9f3ffccca37'
+end
 
 def celsius_weather(weather)
   return nil if weather==nil
@@ -23,11 +29,6 @@ def celsius_weather(weather)
     return "#{farenheit}°F"
   end
   return "#{weather.temperature}°K"
-end
-
-Openweather2.configure do |config|
-  config.endpoint = 'http://api.openweathermap.org/data/2.5/weather'
-  config.apikey = 'a71219e79a6b01978ac3a9f3ffccca37'
 end
 
 Telegram::Bot::Client.run(token) do |bot|
