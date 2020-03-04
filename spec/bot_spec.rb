@@ -17,12 +17,28 @@ end
 
 RSpec.describe Botclient do
   let(:botclient) { Botclient.new('1109360723:AAHam4xsAf-7wgF8Hjt6ACbxxOH66cimbaM', 'a71219e79a6b01978ac3a9f3ffccca37', false)}
-  describe 'tests celsius_weather' do
-    it 'test where param is nil' do
+  describe 'tests method celsius_weather' do
+    it 'test when param is nil' do
       expect(botclient.chatbot.celsius_weather(nil)).to eql(nil)
     end
-    it 'test where passed a valid parameter' do
+    it 'test when passed a valid parameter' do
       expect(botclient.chatbot.celsius_weather(Weather.new(293.15))).to eql("20.0°C")
+    end
+    it 'test when passed a valid parameter and format is F' do
+      botclient.chatbot.chosen_format='F'
+      expect(botclient.chatbot.celsius_weather(Weather.new(293.15))).to eql("68.0°F")
+    end
+    it 'test when passed a valid parameter and format is K' do
+      botclient.chatbot.chosen_format='K'
+      expect(botclient.chatbot.celsius_weather(Weather.new(293.15))).to eql("293.15°K")
+    end
+  end
+  describe 'tests method give_bot_message' do
+    it 'test when param temperature is nil' do
+      expect(botclient.chatbot.give_bot_message(nil, "bogotá", "invalid data"){|x,y| "temperature in #{x} is #{y}"}).to eql("invalid data")
+    end
+    it 'test when param temperature is valid' do
+      expect(botclient.chatbot.give_bot_message("16°C", "bogotá", "invalid data"){|x,y| "temperature in #{x} is #{y}"}).to eql("temperature in bogotá is 16°C")
     end
   end
   # it 'test update_after_move when input -5 as move' do
