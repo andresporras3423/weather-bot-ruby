@@ -46,10 +46,10 @@ class Botclient
       chatbot.no_more=true
       bot.api.send_message(chat_id: message.chat.id, text: "OK!, no more temperature updates")
     when /\/format/
-      bot_message = update_format(message)
+      bot_message = chatbot.update_format(message)
       bot.api.send_message(chat_id: message.chat.id, text: bot_message)
     when /\/interval/
-      bot_message = update_interval(message)
+      bot_message = chatbot.update_interval(message)
       bot.api.send_message(chat_id: message.chat.id, text: bot_message)
     when  /zip:/
       bot_message = get_by_zip(message)
@@ -108,27 +108,6 @@ class Botclient
       puts("#{message_error}: #{exception}")
     end
     return nil
-  end
-
-  def update_format(message)
-    temp_format = message.text.downcase.gsub('/format', '').gsub(/\s+/m, '')
-    if temp_format=~/\A[kfc]{1}\Z/ 
-      chatbot.chosen_format = temp_format.upcase
-      return "new format is °#{chatbot.chosen_format}"
-    end
-    return "invalid format"
-  end
-
-  def update_interval(message)
-    temp_interval = message.text.downcase.gsub('/interval', '').gsub(/\s+/m, '')
-    if temp_interval =~ /\A[1-9]+[0-9]*[smhd]{1}\Z/
-      amount = temp_interval[0..(temp_interval.length-2)].to_i
-      chosen_option = chatbot.options.find{|opt| opt.time==temp_interval[temp_interval.length-1]}
-      chosen_format_time = amount==1 ? chosen_option.format_time[0..(chosen_option.format_time.length-2)] : chosen_option.format_time
-      chatbot.interval= amount*chosen_option.number
-      return "new interval in #{amount} #{chosen_format_time}"
-    end
-    return "invalid interval"
   end
 
   def get_by_zip(message)
