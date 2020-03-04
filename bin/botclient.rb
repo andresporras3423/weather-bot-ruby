@@ -103,6 +103,7 @@ class Botclient
     Thread.new do
       loop do
         break if chatbot.no_more
+
         weather = capture_error([lat, lon], 'weather_coord')
         temperature = chatbot.celsius_weather(weather)
         bot_message = chatbot.give_bot_message(temperature, geo.first.city, 'a problem has occurred') do |x, y|
@@ -130,8 +131,8 @@ class Botclient
         message_error = 'invalid data by error'
         return Openweather2.get_weather(city: params[0])
       end
-    rescue StandardError => exception
-      puts("#{message_error}: #{exception}")
+    rescue StandardError => e
+      puts("#{message_error}: #{e}")
     end
     nil
   end
