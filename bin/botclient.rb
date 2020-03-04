@@ -159,19 +159,3 @@ class Botclient
     chatbot.give_bot_message(temperature, city, 'invalid data') { |x, y| "temperature in #{x} is #{y}" }
   end
 end
-
-# def capture_geocoder_error(lat, lon)
-#   begin
-#     return Geocoder.search([lat.to_s, lon.to_s])
-#   rescue => exception
-#     puts("a problem has occurred: #{exception}")
-#   end
-# end
-
-# def capture_openweather_error(lat, lon)
-#   begin
-#     return Openweather2.get_weather(lon: lon, lat: lat)
-#   rescue => exception
-#     puts("a problem has occurred: #{exception}")
-#   end
-# end
