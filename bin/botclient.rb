@@ -14,9 +14,9 @@ class Botclient
     @chatbot = Chatbot.new([option1, option2, option3, option4])
     @token_telegram = token_telegram
     @key_openweather = key_openweather
+    configure_openweather
     return unless init
 
-    configure_openweather
     begin_telegram_client
   end
 
