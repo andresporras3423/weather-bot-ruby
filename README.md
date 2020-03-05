@@ -31,7 +31,7 @@ Eight Microverse project for Ruby Course
 #### and deployed to GitHub
 
 ## Tutorial
-- On telegram look for ruby3423_bot en type **/start** to begin
+- On telegram look for ruby3423_bot and type **/start** to begin
 - type **/tutorial** for the tutorial with all the commands you can use to communicate with the bot
 
 * **Miami**
