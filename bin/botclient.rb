@@ -96,10 +96,10 @@ class Botclient
       bot.api.send_message(chat_id: chat_id, text: 'a problem has occurred')
       return
     end
-    update_temperature(lat, lon, geo, message, bot)
+    update_temperature(lat, lon, geo, message, bot, chat_id)
   end
 
-  def update_temperature(lat, lon, geo, _message, bot)
+  def update_temperature(lat, lon, geo, message, bot, chat_id)
     Thread.new do
       loop do
         break if chatbot.no_more

@@ -66,6 +66,10 @@ In the image example the bot answer "hello name-of-the-user" if user type hello,
 
 [Live Demo](https://web.telegram.org/#/im?p=@ruby3423_bot)
 
+## Project Presentation (Video)
+
+[Project Presentation](https://www.loom.com/share/42f6a6ae69dd47ce8c600cc0db2b74f7)
+
 ## Authors
 
 **Oscar Russi**

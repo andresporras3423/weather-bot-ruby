@@ -12,10 +12,10 @@ class Chatbot
     return nil if weather.nil?
 
     if chosen_format == 'C'
-      celsius = (weather.temperature - 273.15).round(2)
+      celsius = (weather.temperature - 275.15).round(2)
       return "#{celsius}°C"
     elsif chosen_format == 'F'
-      farenheit = (((weather.temperature - 273.15) * 1.8) + 32).round(2)
+      farenheit = (((weather.temperature - 275.15) * 1.8) + 32).round(2)
       return "#{farenheit}°F"
     end
     "#{weather.temperature}°K"
