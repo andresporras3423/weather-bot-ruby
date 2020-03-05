@@ -17,7 +17,7 @@ Eight Microverse project for Ruby Course
 - By default the interval is 60 seconds but can be modified using /interval message
 - to learn more about how to use the bot type /start and /tutorial
 - To make the project work in another environment is necessary to install three gems, to do it run:
-* gem install telegram-bot
+* gem install telegram-bot-ruby
 * gem install openweather2
 * gem install geocoder
 
@@ -54,17 +54,17 @@ Eight Microverse project for Ruby Course
 2) type /start to request a bot
 3) type name of your bot
 4) save the token botfather will give you because you will need that token to control your bot
-5) run **gem install telegram-bot**  and add **require "telegram/bot"** in your project
+5) run **gem install telegram-bot-ruby**  and add **require "telegram/bot"** in your project
 6) try something like this
 
 ![screenshot](./example.png)
 
-In the image example the bot answer hello <name_of_the_user> if user type hello, otherwise it send the message "I dont know what are you saying"
+In the image example the bot answer "hello name-of-the-user" if user type hello, otherwise it send the message "I dont know what are you saying"
 
 
 ## Live Demo
 
-[Live Demo](https://repl.it/@yoxter3423/enumerable-module-ruby) (not working until merge with master)
+[Live Demo](https://web.telegram.org/#/im?p=@ruby3423_bot)
 
 ## Authors
 

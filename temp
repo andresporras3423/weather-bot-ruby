@@ -1,8 +1,0 @@
-require 'bundler/inline'
-
-gemfile true do
- source 'http://rubygems.org'
- gem 'telegram/bot'
- gem 'openweather2'
- gem 'geocoder'
-end
