@@ -32,7 +32,7 @@ Eight Microverse project for Ruby Course
 
 ## How to use this bot
 - You need a account in telegram
-- On telegram look for ruby3423_bot and type **/start** to begin (or click in [Live Demo](https://web.telegram.org/#/im?p=@ruby3423_bot))
+- On telegram look for weather3423_bot and type **/start** to begin (or click in [Live Demo](https://web.telegram.org/#/im?p=@weather3423_bot))
 
 ## Bot Tutorial
 - Type **/tutorial** for the tutorial with all the commands you can use to communicate with the bot
@@ -81,7 +81,7 @@ In order to clone this project you will need
 
 ## Live Demo
 
-[Live Demo](https://web.telegram.org/#/im?p=@ruby3423_bot)
+[Live Demo](https://web.telegram.org/#/im?p=@weather3423_bot)
 
 ## Project Presentation (Video)
 

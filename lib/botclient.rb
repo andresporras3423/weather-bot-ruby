@@ -57,7 +57,7 @@ class Botclient
     bot_message = case message.text.downcase
                   when %r{/format}
                     chatbot.update_format(message)
-                  when /interval/
+                  when %r{/interval}
                     chatbot.update_interval(message)
                   when /zip:/
                     get_by_zip(message)

@@ -2,7 +2,7 @@ require_relative '../lib/test_classes'
 require_relative '../lib/botclient'
 require_relative '../lib/chatbot'
 
-token_telegram = '1109360723:AAHam4xsAf-7wgF8Hjt6ACbxxOH66cimbaM'
+token_telegram = '1123681465:AAGnPY8UnDj-O6kGBkU9sz_vl9EB68cp-OM'
 key_weather = 'a71219e79a6b01978ac3a9f3ffccca37'
 
 RSpec.describe Chatbot do
