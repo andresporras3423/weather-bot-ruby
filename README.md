@@ -1,4 +1,4 @@
-# bot-ruby
+# weather-bot-ruby
 
 Capstone project for Ruby course in Microverse
 
