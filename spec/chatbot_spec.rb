@@ -1,12 +1,10 @@
+require_relative '../lib/keys'
 require_relative '../lib/test_classes'
 require_relative '../lib/botclient'
 require_relative '../lib/chatbot'
 
-token_telegram = '1123681465:AAGnPY8UnDj-O6kGBkU9sz_vl9EB68cp-OM'
-key_weather = 'a71219e79a6b01978ac3a9f3ffccca37'
-
 RSpec.describe Chatbot do
-  let(:botclient) { Botclient.new(token_telegram, key_weather, false) }
+  let(:botclient) { Botclient.new(telegram_token, weather_key, false) }
   describe 'tests method celsius_weather' do
     it 'test when param is nil' do
       expect(botclient.chatbot.celsius_weather(nil)).to eql(nil)
