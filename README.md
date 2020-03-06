@@ -30,10 +30,12 @@ Eight Microverse project for Ruby Course
 
 #### and deployed to GitHub
 
-## Tutorial
-- On telegram look for ruby3423_bot and type **/start** to begin
-- type **/tutorial** for the tutorial with all the commands you can use to communicate with the bot
+## How to use this bot
+- You need a account in telegram
+- On telegram look for ruby3423_bot and type **/start** to begin (or click in [Live Demo](https://web.telegram.org/#/im?p=@ruby3423_bot))
 
+## Tutorial
+- Type **/tutorial** for the tutorial with all the commands you can use to communicate with the bot
 * **Miami**
 * Get temperature of miami
 * **coord:  4.5 74.25**
@@ -60,6 +62,19 @@ Eight Microverse project for Ruby Course
 ![screenshot](./example.png)
 
 In the image example the bot answer "hello name-of-the-user" if user type hello, otherwise it send the message "I dont know what are you saying"
+
+## How to clone this project
+In order to clone this project you will need
+1) have installed ruby in our computer
+2) Create a bot in telegram
+3) Create an account in openweathermap and request a key
+4) make the installation of the next gems:
+* gem install telegram-bot-ruby
+* gem install openweather2
+* gem install geocoder
+5) download this project
+6) in bin/main.rb replace current telegram token and openweather key for your own telegram token and weather key
+7) in the terminal go to the bin folder of this project and run "ruby main.rb"
 
 
 ## Live Demo
