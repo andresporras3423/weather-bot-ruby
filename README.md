@@ -91,7 +91,8 @@ In order to clone this project you will need
 
 **Oscar Russi**
 - Github: [@andresporras3423](https://github.com/andresporras3423/)
-- Linkedin: [Oscar Russi](https://www.linkedin.com/in/oscar-andr%C3%A9s-russi-porras-053236167/)
+- Linkedin: [Oscar Russi](https://www.linkedin.com/in/oscar-andres-russi-porras/)
+- Twitter: [@OscarRussi1](https://twitter.com/OscarRussi1)
 
 ## 🤝 Contributing
 
