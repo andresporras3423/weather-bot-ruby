@@ -2,6 +2,10 @@
 
 Capstone project for Ruby course in Microverse
 
+## Usage
+
+Telegram chatbot to get the temperature of the requested place
+
 ![screenshot](./screenshot.png)
 
 # enumerable-module-ruby test
