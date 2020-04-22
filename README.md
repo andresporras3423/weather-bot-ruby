@@ -78,6 +78,9 @@ In order to clone this project you will need
 7) In the terminal, go to the bin folder of this project and run "ruby main.rb"
 8) You can also run tests of the project with "rspec" command (run command inside the folder project), but you need to have install rspec program
 
+## Running tests
+
+To run the automated tests type "rspec" command from the terminal. You must be inside the project folder.
 
 ## Live Demo
 
