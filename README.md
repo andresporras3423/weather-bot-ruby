@@ -80,7 +80,7 @@ In order to clone this project you will need
 
 ## Running tests
 
-To run the automated tests type "rspec" command from the terminal. You must be inside the project folder.
+To run the automated tests, type "rspec" command from the terminal end press enter. You must be inside the project folder.
 
 ## Live Demo
 
