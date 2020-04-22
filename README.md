@@ -82,6 +82,10 @@ In order to clone this project you will need
 
 To run the automated tests, type "rspec" command from the terminal end press enter. You must be inside the project folder.
 
+## Planned Features
+
+https://github.com/andresporras3423/weather-bot-ruby/issues
+
 ## Live Demo
 
 [Live Demo](https://web.telegram.org/#/im?p=@weather3423_bot)
