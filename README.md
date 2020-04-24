@@ -94,11 +94,11 @@ https://github.com/andresporras3423/weather-bot-ruby/issues
 
 [Live Demo](https://web.telegram.org/#/im?p=@weather3423_bot)
 
-## Project Presentation (Video)
+## Project Presentation (VIDEO)
 
 [Project Presentation](https://www.loom.com/share/6a5bd2ea817a439f958324f69bdd58bc)
 
-[![SC2 Video](https://img.youtube.com/vi/--b-9HrKK6w/0.jpg)](http://www.youtube.com/watch?v=--b-9HrKK6w)
+[![SC2 Video](https://img.youtube.com/vi/--b-9HrKK6w/0.jpg)](https://www.loom.com/share/6a5bd2ea817a439f958324f69bdd58bc)
 
 ## Authors
 
