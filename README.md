@@ -36,18 +36,18 @@ Eight Microverse project for Ruby Course.
 
 ## How to use this bot
 - You need a account in Telegram.
-- On telegram look for weather3423_bot and type **/start** to begin (or click in [Live Demo](https://web.telegram.org/#/im?p=@weather3423_bot))..
+- On telegram look for weather3423_bot and type **/start** to begin (or click in [Live Demo](https://web.telegram.org/#/im?p=@weather3423_bot)).
 
 ## Bot Tutorial
-- Type **/tutorial** for the tutorial with all the commands you can use to communicate with the bot
+- Type **/tutorial** for the tutorial with all the commands you can use to communicate with the bot.
 * **Miami**
-* Get temperature of miami.
+* Get temperature of Miami.
 * **coord:  4.5 74.25**
 * Get temperature of place with latitude 4.5 and longitude 74.25.
 * **zip:  33101**
 * Get temperature of place with zip code 33101.
 * **/format c**
-* Use celsius format, the other options are f (farenheit) and k (kelvin).
+* Use celsius format, the other options are f (Farenheit) and k (Kelvin).
 * **/interval 10m**
 * Updates of temperature every 10 minutes,
 * The other options are s (seconds), h (hour), d (days).
