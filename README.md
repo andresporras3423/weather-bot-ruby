@@ -27,10 +27,10 @@ Eight Microverse project for Ruby Course.
 
 ## Built With
 
-- Ruby
-- Telegrem API [Link](https://core.telegram.org/bots/api)
-- Geocoder API [Link](http://www.rubygeocoder.com/)
-- Openweather2 [Link](https://openweathermap.org/)
+- Ruby.
+- Telegrem API [Link](https://core.telegram.org/bots/api).
+- Geocoder API [Link](http://www.rubygeocoder.com/).
+- Openweather2 [Link](https://openweathermap.org/).
 
 #### and deployed to GitHub
 
