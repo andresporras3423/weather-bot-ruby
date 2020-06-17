@@ -1,19 +1,6 @@
 # Weather-bot-ruby
 
 Capstone project for Ruby course in Microverse.
-
-## Usage
-
-Telegram chatbot to get the temperature of the requested place.
-
-![screenshot](./screenshot.png)
-
-# Enumerable-module-ruby test
-
-Eight Microverse project for Ruby Course.
-
-# What it does
-
 - I have created a bot in Telegram.
 - This bot give info about temperature.
 - It can use the city name, coordinates (latitude and longitude), or zip code to get the information.
@@ -24,6 +11,16 @@ Eight Microverse project for Ruby Course.
 * "gem install telegram-bot-ruby"
 * "gem install openweather2"
 * "gem install geocoder"
+
+![screenshot](./screenshot.png)
+
+# Enumerable-module-ruby test
+
+Eight Microverse project for Ruby Course.
+
+# What it does
+
+- This bot gives information about the temperature.
 
 ## Built With
 
